@@ -1858,7 +1858,6 @@ body {
 .logo, .mobile-menu-btn, .header-social-links {
     flex-shrink: 0; 
 }
-/* Base Styles */
 :root {
     --primary-color: #6a1b9a;
     --secondary-color: #ffab00;
@@ -1885,7 +1884,7 @@ body {
     width: 100%;
     max-width: 1200px;
     margin: 0 auto;
-    padding: 0 15px; /* Reduced padding for mobile */
+    padding: 0 15px;
 }
 
 /* Header Styles */
@@ -1944,8 +1943,13 @@ body {
 }
 
 /* Navigation */
-.main-nav {
+.nav-wrapper {
     flex: 1;
+    display: flex;
+    justify-content: center;
+}
+
+.main-nav {
     display: flex;
     justify-content: center;
 }
@@ -1957,7 +1961,7 @@ body {
     padding: 0;
 }
 
-.main-nav li {
+.main-nav ul li {
     margin: 0 15px;
 }
 
@@ -1969,6 +1973,7 @@ body {
     transition: color 0.3s;
     display: flex;
     align-items: center;
+    padding: 10px;
 }
 
 .main-nav a i {
@@ -1989,6 +1994,55 @@ body {
     font-size: 1.5rem;
     cursor: pointer;
     flex-shrink: 0;
+    transition: transform 0.3s ease;
+}
+
+.mobile-menu-btn.active i.fas.fa-bars {
+    display: none;
+}
+
+.mobile-menu-btn.active i.fas.fa-times {
+    display: inline;
+}
+
+.mobile-menu-btn i.fas.fa-times {
+    display: none;
+}
+
+/* Mobile Menu Toggle */
+.nav-wrapper.active {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    background-color: var(--dark-color);
+    z-index: 749;
+    max-height: 300px; /* Adjustable based on content */
+    overflow: hidden;
+    transition: max-height 0.3s ease-in-out;
+}
+
+.main-nav.active {
+    flex-direction: column;
+    width: 100%;
+}
+
+.main-nav.active ul {
+    flex-direction: column;
+}
+
+.main-nav.active ul li {
+    margin: 0;
+    width: 100%;
+    text-align: center;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.main-nav.active a {
+    width: 100%;
+    justify-content: center;
+    padding: 15px 0;
+    font-size: 1.1rem;
 }
 
 /* Header Social Links */
@@ -2786,10 +2840,11 @@ textarea {
     transform: scale(1.05);
 }
 
-/* Disclaimer and Policy Sections */
-.disclaimer-section, .policy-section {
+/* Disclaimer, Policy, and Terms Sections */
+.disclaimer-section, .policy-section, .terms-section {
     padding: 80px 0;
     background-color: #0f0e17;
+    background: linear-gradient(135deg, #0f0e17 0%, #1a1a2e 100%);
     color: #ffffff;
 }
 
@@ -2862,13 +2917,6 @@ textarea {
     text-decoration: underline;
 }
 
-.terms-section {
-    padding: 80px 0;
-    background-color: #0f0e17;
-    background: linear-gradient(135deg, #0f0e17 0%, #1a1a2e 100%);
-    color: #ffffff;
-}
-
 .effective-date {
     font-style: italic;
     color: #ffd700;
@@ -2917,14 +2965,46 @@ textarea {
 }
 
 @media (max-width: 992px) {
-    .main-nav {
-        display: none;
-    }
     .header-social-links {
         display: none;
     }
     .mobile-menu-btn {
         display: block;
+    }
+    .nav-wrapper {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background-color: var(--dark-color);
+        z-index: 749;
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.3s ease-in-out;
+    }
+    .main-nav {
+        width: 100%;
+        justify-content: flex-start;
+    }
+    .main-nav ul {
+        flex-direction: column;
+        width: 100%;
+        padding: 0;
+    }
+    .main-nav ul li {
+        margin: 0;
+        width: 100%;
+        text-align: center;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    .main-nav a {
+        width: 100%;
+        justify-content: center;
+        padding: 15px 0;
+        font-size: 1.1rem;
+    }
+    .main-nav.active {
+        max-height: 300px;
     }
     .about-content {
         grid-template-columns: 1fr;

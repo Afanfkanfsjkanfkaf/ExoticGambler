@@ -1,0 +1,1860 @@
+/* Base Styles */
+:root {
+    --primary-color: #6a1b9a;
+    --secondary-color: #ffab00;
+    --dark-color: #1a1a2e;
+    --light-color: #f8f9fa;
+    --accent-color: #00e676;
+    --text-color: #333;
+    --text-light: #fff;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background-color: #f5f5f5;
+    color: var(--text-color);
+}
+
+.container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* Header Styles */
+.main-header {
+    background-color: var(--dark-color);
+    color: var(--text-light);
+    padding: 5px 0; 
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    position: sticky;
+    top: 0;
+    z-index: 750;
+}
+
+.main-header .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+}
+
+.logo a {
+    text-decoration: none;
+    color: var(--text-light);
+    display: flex;
+    align-items: center;
+    font-size: 1.5rem;
+    font-weight: 700;
+}
+
+.logo-icon {
+    color: var(--secondary-color);
+    margin-right: 10px;
+    font-size: 1.8rem;
+}
+
+/* Navigation */
+.main-nav ul {
+    display: flex;
+    list-style: none;
+}
+
+.main-nav li {
+    margin: 0 15px;
+    position: relative;
+}
+
+.main-nav a {
+    color: var(--text-light);
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 1rem;
+    transition: color 0.3s;
+    display: flex;
+    align-items: center;
+}
+
+.main-nav a i {
+    margin-right: 8px;
+    font-size: 0.9rem;
+}
+
+.main-nav a:hover {
+    color: var(--secondary-color);
+}
+
+/* Header Buttons */
+.header-actions {
+    display: flex;
+    align-items: center;
+}
+
+.btn {
+    padding: 8px 16px;
+    border-radius: 4px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s;
+    border: none;
+    display: flex;
+    align-items: center;
+    font-size: 0.9rem;
+}
+
+.btn i {
+    margin-right: 8px;
+}
+
+.btn-shop {
+    background-color: var(--secondary-color);
+    color: var(--dark-color);
+    margin-right: 10px;
+}
+
+.btn-shop:hover {
+    background-color: #ffc107;
+    transform: translateY(-2px);
+}
+
+.btn-login {
+    background-color: transparent;
+    color: var(--text-light);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.btn-login:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    border-color: var(--secondary-color);
+    color: var(--secondary-color);
+}
+
+/* Mobile Menu Button */
+.mobile-menu-btn {
+    display: none;
+    background: none;
+    border: none;
+    color: var(--text-light);
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+
+/* Responsive Styles */
+@media (max-width: 992px) {
+    .main-nav {
+        display: none;
+    }
+    
+    .header-actions {
+        display: none;
+    }
+    
+    .mobile-menu-btn {
+        display: block;
+    }
+    
+    .main-header .container {
+        justify-content: space-between;
+    }
+}
+
+/* Animation */
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+}
+
+.logo:hover .logo-icon {
+    animation: pulse 1s infinite;
+}
+
+.hero-section {
+    position: relative;
+    height: 80vh;
+    min-height: 600px;
+    background: url('A_vibrant_exotic_background_featuring_a_luxurious_casino_setting._The_scene_is_filled_with_rich_de_1.jpg') no-repeat center center;
+    background-size: cover;
+    display: flex;
+    align-items: center;
+    color: var(--text-light);
+    text-align: center;
+    padding: 40px 0;
+}
+
+.hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        to right,
+        rgba(26, 26, 46, 0.9) 0%,
+        rgba(26, 26, 46, 0.7) 100%
+    );
+    z-index: 1;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.hero-title {
+    font-size: 3.5rem;
+    font-weight: 700;
+    margin-bottom: 20px;
+    line-height: 1.2;
+    text-transform: uppercase;
+}
+
+.hero-title span {
+    display: block;
+}
+
+.hero-title .highlight {
+    color: var(--secondary-color);
+    font-size: 4.5rem;
+    background: linear-gradient(
+        to right,
+        var(--secondary-color),
+        #ffd700
+    );
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.hero-subtitle {
+    font-size: 1.3rem;
+    margin-bottom: 40px;
+    line-height: 1.6;
+    opacity: 0.9;
+}
+
+.hero-cta {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.btn-primary {
+    background-color: var(--secondary-color);
+    color: var(--dark-color);
+    padding: 12px 30px;
+    font-size: 1.1rem;
+    border-radius: 30px;
+    box-shadow: 0 4px 15px rgba(255, 171, 0, 0.3);
+}
+
+.btn-primary:hover {
+    background-color: #ffc107;
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(255, 171, 0, 0.4);
+}
+
+.btn-secondary {
+    background-color: transparent;
+    color: var(--text-light);
+    border: 2px solid var(--secondary-color);
+    padding: 12px 30px;
+    font-size: 1.1rem;
+    border-radius: 30px;
+}
+
+.btn-secondary:hover {
+    background-color: rgba(255, 171, 0, 0.1);
+    transform: translateY(-3px);
+}
+
+/* Responsive Hero Section */
+@media (max-width: 768px) {
+    .hero-section {
+        height: auto;
+        min-height: 500px;
+        padding: 100px 0;
+    }
+    
+    .hero-title {
+        font-size: 2.5rem;
+    }
+    
+    .hero-title .highlight {
+        font-size: 3rem;
+    }
+    
+    .hero-subtitle {
+        font-size: 1.1rem;
+    }
+    
+    .hero-cta {
+        flex-direction: column;
+        gap: 15px;
+    }
+    
+    .btn-primary, .btn-secondary {
+        width: 100%;
+        max-width: 250px;
+        margin: 0 auto;
+    }
+}
+/* Featured Casinos Section */
+.featured-section {
+    padding: 80px 0;
+    background-color: #f8f9fa;
+}
+
+.section-title {
+    text-align: center;
+    margin-bottom: 50px;
+    font-size: 2.5rem;
+    color: var(--dark-color);
+    position: relative;
+}
+
+.section-title i {
+    color: var(--secondary-color);
+    margin-right: 15px;
+}
+
+.casinos-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 30px;
+}
+
+.casino-card {
+    background: white;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    transition: transform 0.3s, box-shadow 0.3s;
+    position: relative;
+}
+
+.casino-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+}
+
+.casino-card.featured {
+    border: 2px solid var(--secondary-color);
+}
+
+.featured-badge {
+    position: absolute;
+    top: 15px;
+    right: -10px;
+    background-color: var(--secondary-color);
+    color: var(--dark-color);
+    padding: 5px 15px;
+    font-weight: bold;
+    font-size: 0.9rem;
+    border-radius: 20px;
+    box-shadow: 0 3px 10px rgba(255, 171, 0, 0.3);
+    z-index: 2;
+}
+
+.casino-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    background: linear-gradient(135deg, var(--dark-color) 0%, #2a2a4a 100%);
+    color: white;
+}
+
+.casino-logo-placeholder {
+    width: 60px;
+    height: 60px;
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.8rem;
+    color: var(--secondary-color);
+}
+
+.casino-percentage {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: var(--secondary-color);
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.casino-body {
+    padding: 20px;
+}
+
+.casino-name {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+    color: var(--dark-color);
+}
+
+.casino-description {
+    color: #666;
+    margin-bottom: 15px;
+    line-height: 1.6;
+}
+
+.casino-features {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+.casino-features span {
+    background-color: #f0f0f0;
+    padding: 5px 10px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    display: flex;
+    align-items: center;
+}
+
+.casino-features i {
+    margin-right: 5px;
+    color: var(--secondary-color);
+}
+
+.casino-footer {
+    padding: 0 20px 20px;
+}
+
+.btn-bonus {
+    display: block;
+    width: 100%;
+    padding: 12px;
+    background: linear-gradient(135deg, var(--secondary-color) 0%, #ffc107 100%);
+    color: var(--dark-color);
+    border: none;
+    border-radius: 5px;
+    font-weight: bold;
+    text-align: center;
+    transition: all 0.3s;
+}
+
+.btn-bonus:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(255, 171, 0, 0.4);
+    background: linear-gradient(135deg, #ffc107 0%, var(--secondary-color) 100%);
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+    .casinos-grid {
+        grid-template-columns: 1fr;
+        max-width: 400px;
+        margin: 0 auto;
+    }
+    
+    .section-title {
+        font-size: 2rem;
+    }
+}
+/* About Us Section */
+.about-section {
+    padding: 100px 0;
+    position: relative;
+    overflow: hidden;
+}
+
+.about-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: center;
+    position: relative;
+    z-index: 2;
+}
+
+.about-image-wrapper {
+    position: relative;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+    height: 500px;
+}
+
+.about-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.about-image:hover {
+    transform: scale(1.03);
+}
+
+.image-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, rgba(106,27,154,0.2) 0%, rgba(26,26,46,0.5) 100%);
+}
+
+.about-text {
+    padding: 30px;
+}
+
+.section-title {
+    font-size: 2.5rem;
+    margin-bottom: 25px;
+    color: var(--dark-color);
+}
+
+.section-title i {
+    color: var(--secondary-color);
+    margin-right: 15px;
+}
+
+.about-lead {
+    font-size: 1.8rem;
+    line-height: 1.4;
+    margin-bottom: 30px;
+    color: var(--dark-color);
+}
+
+.highlight {
+    color: var(--secondary-color);
+    font-weight: 600;
+}
+
+.about-details p {
+    margin-bottom: 20px;
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: #555;
+}
+
+.about-features {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+    margin-top: 30px;
+}
+
+.feature-item {
+    display: flex;
+    align-items: center;
+    background: rgba(106,27,154,0.08);
+    padding: 15px;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+}
+
+.feature-item:hover {
+    background: rgba(106,27,154,0.15);
+    transform: translateY(-3px);
+}
+
+.feature-item i {
+    color: var(--secondary-color);
+    margin-right: 10px;
+    font-size: 1.2rem;
+}
+
+/* Responsive Design */
+@media (max-width: 1200px) {
+    .about-image-wrapper {
+        height: 450px;
+    }
+}
+
+@media (max-width: 992px) {
+    .about-content {
+        grid-template-columns: 1fr;
+    }
+    
+    .about-image-wrapper {
+        height: 400px;
+        max-width: 600px;
+        margin: 0 auto;
+    }
+    
+    .about-text {
+        text-align: center;
+        padding: 20px 0;
+    }
+    
+    .about-features {
+        grid-template-columns: 1fr;
+        max-width: 400px;
+        margin: 30px auto 0;
+    }
+}
+
+@media (max-width: 768px) {
+    .about-section {
+        padding: 60px 0;
+    }
+    
+    .about-image-wrapper {
+        height: 350px;
+    }
+    
+    .section-title {
+        font-size: 2rem;
+    }
+    
+    .about-lead {
+        font-size: 1.5rem;
+    }
+}
+/* About Us Section - Dark Theme */
+.about-section {
+    padding: 100px 0;
+    background-color: #0f0e17; /* Deep navy background */
+    background: linear-gradient(135deg, #0f0e17 0%, #1a1a2e 100%);
+    color: #ffffff;
+}
+
+.about-image-wrapper {
+    border: 2px solid #ffd700; /* Gold border */
+}
+
+.image-overlay {
+    background: linear-gradient(135deg, rgba(26,26,46,0.7) 0%, rgba(106,27,154,0.3) 100%);
+}
+
+.section-title {
+    color: #ffd700; /* Gold title */
+}
+
+.about-lead {
+    color: #ffffff;
+}
+
+.highlight {
+    color: #ffd700; /* Gold highlights */
+    font-weight: 600;
+}
+
+.about-details p {
+    color: #d1d1d1; /* Light gray text */
+}
+
+.feature-item {
+    background-color: #1a1a2e; /* Dark feature boxes */
+    color: #ffffff;
+    border-left: 3px solid #ffd700; /* Gold accent */
+}
+
+.feature-item:hover {
+    background-color: #252547;
+    box-shadow: 0 5px 15px rgba(255, 215, 0, 0.2);
+}
+
+.feature-item i {
+    color: #ffd700; /* Gold icons */
+}  
+/* Updated Our Favorites Section - Dark Theme */
+.featured-section {
+    background-color: #0f0e17;
+    background: linear-gradient(135deg, #0f0e17 0%, #1a1a2e 100%);
+    color: #ffffff;
+}
+
+.section-title {
+    color: #ffd700;
+}
+
+.section-title i {
+    color: #ffd700;
+}
+
+.casino-card {
+    background-color: #1a1a2e;
+    border: 1px solid #2a2a4a;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+.casino-card:hover {
+    box-shadow: 0 10px 25px rgba(255, 215, 0, 0.2);
+    border-color: #ffd700;
+}
+
+.casino-header {
+    background: linear-gradient(135deg, #2a2a4a 0%, #1a1a2e 100%);
+    border-bottom: 1px solid #ffd700;
+}
+
+.casino-name {
+    color: #ffffff;
+}
+
+.casino-description {
+    color: #d1d1d1;
+}
+
+.casino-percentage {
+    color: #ffd700;
+    text-shadow: 0 2px 8px rgba(255, 215, 0, 0.4);
+}
+
+.casino-features span {
+    background-color: #252547;
+    color: #ffffff;
+    border: 1px solid #3a3a6a;
+}
+
+.casino-features i {
+    color: #ffd700;
+}
+
+.btn-bonus {
+    background: linear-gradient(135deg, #ffd700 0%, #ffaa00 100%);
+    color: #1a1a2e;
+    font-weight: bold;
+    border: none;
+}
+
+.btn-bonus:hover {
+    background: linear-gradient(135deg, #ffaa00 0%, #ffd700 100%);
+    box-shadow: 0 5px 20px rgba(255, 215, 0, 0.4);
+}
+
+/* Featured Badge Styling */
+.featured-badge {
+    background-color: #ffd700;
+    color: #1a1a2e;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.casino-card.featured {
+    border: 2px solid #ffd700;
+    box-shadow: 0 0 0 4px rgba(255, 215, 0, 0.2);
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    .casino-card {
+        background-color: #1a1a2e;
+    }
+    
+    .casino-features span {
+        background-color: #252547;
+    }
+}
+
+/* Contact Us Section - Dark Theme */
+.contact-section {
+    padding: 80px 0;
+    background-color: #0f0e17;
+    background: linear-gradient(135deg, #0f0e17 0%, #1a1a2e 100%);
+    color: #ffffff;
+}
+
+.contact-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: center;
+}
+
+.contact-info {
+    padding-right: 40px;
+}
+
+.section-title {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+    color: #ffd700;
+}
+
+.section-title i {
+    margin-right: 15px;
+}
+
+.contact-description {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    margin-bottom: 30px;
+    color: #d1d1d1;
+}
+
+.contact-details {
+    display: grid;
+    gap: 20px;
+}
+
+.detail-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 15px;
+}
+
+.detail-item i {
+    font-size: 1.5rem;
+    color: #ffd700;
+    margin-top: 5px;
+}
+
+.detail-item h3 {
+    color: #ffd700;
+    margin-bottom: 5px;
+    font-size: 1.2rem;
+}
+
+.detail-item p {
+    color: #b0b0b0;
+    font-size: 0.95rem;
+}
+
+/* Form Styles */
+.contact-form {
+    background-color: #1a1a2e;
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    border: 1px solid #2a2a4a;
+}
+
+.form-group {
+    margin-bottom: 25px;
+}
+
+.dual-input {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+.input-wrapper {
+    position: relative;
+}
+
+label {
+    display: block;
+    margin-bottom: 8px;
+    color: #ffd700;
+    font-weight: 500;
+}
+
+input, textarea {
+    width: 100%;
+    padding: 12px 15px;
+    background-color: #252547;
+    border: 1px solid #3a3a6a;
+    border-radius: 5px;
+    color: #ffffff;
+    font-size: 1rem;
+    transition: all 0.3s;
+}
+
+input:focus, textarea:focus {
+    outline: none;
+    border-color: #ffd700;
+    box-shadow: 0 0 0 2px rgba(255, 215, 0, 0.2);
+}
+
+textarea {
+    resize: vertical;
+    min-height: 120px;
+}
+
+.btn-send {
+    background: linear-gradient(135deg, #ffd700 0%, #ffaa00 100%);
+    color: #1a1a2e;
+    padding: 14px 30px;
+    border: none;
+    border-radius: 5px;
+    font-weight: 600;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s;
+    display: inline-flex;
+    align-items: center;
+}
+
+.btn-send:hover {
+    background: linear-gradient(135deg, #ffaa00 0%, #ffd700 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(255, 215, 0, 0.4);
+}
+
+.btn-send i {
+    margin-right: 10px;
+}
+
+.form-notice {
+    margin-top: 20px;
+    font-size: 0.8rem;
+    color: #b0b0b0;
+    line-height: 1.5;
+}
+
+.form-notice i {
+    color: #ffd700;
+    margin-right: 5px;
+}
+
+.form-notice a {
+    color: #ffd700;
+    text-decoration: none;
+}
+
+.form-notice a:hover {
+    text-decoration: underline;
+}
+
+/* Responsive Design */
+@media (max-width: 992px) {
+    .contact-content {
+        grid-template-columns: 1fr;
+    }
+    
+    .contact-info {
+        padding-right: 0;
+        text-align: center;
+    }
+    
+    .detail-item {
+        justify-content: center;
+    }
+    
+    .dual-input {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+}
+
+@media (max-width: 576px) {
+    .contact-form {
+        padding: 30px 20px;
+    }
+    
+    .section-title {
+        font-size: 2rem;
+    }
+}
+/* Footer Styles - Dark Theme */
+.site-footer {
+    background-color: #0a0912;
+    color: #ffffff;
+    padding: 60px 0 0;
+    border-top: 1px solid #2a2a4a;
+}
+
+.footer-content {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 50px;
+    margin-bottom: 50px;
+}
+
+.footer-brand {
+    max-width: 400px;
+}
+
+.footer-logo {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: #ffd700;
+}
+
+.footer-logo i {
+    margin-right: 10px;
+    font-size: 2rem;
+}
+
+.disclaimer {
+    color: #b0b0b0;
+    line-height: 1.6;
+    font-size: 0.95rem;
+}
+
+.footer-links {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+}
+
+.links-column h3 {
+    color: #ffd700;
+    margin-bottom: 20px;
+    font-size: 1.2rem;
+    position: relative;
+    padding-bottom: 10px;
+}
+
+.links-column h3::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 50px;
+    height: 2px;
+    background-color: #ffd700;
+}
+
+.links-column ul {
+    list-style: none;
+}
+
+.links-column li {
+    margin-bottom: 12px;
+}
+
+.links-column a {
+    color: #d1d1d1;
+    text-decoration: none;
+    transition: color 0.3s;
+    display: flex;
+    align-items: center;
+}
+
+.links-column a:hover {
+    color: #ffd700;
+}
+
+.links-column a i {
+    margin-right: 10px;
+    width: 20px;
+    text-align: center;
+}
+
+.social-links {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 25px;
+}
+
+.social-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    background-color: #252547;
+    border-radius: 50%;
+    color: #ffffff;
+    transition: all 0.3s;
+}
+
+.social-icon:hover {
+    background-color: #ffd700;
+    color: #1a1a2e;
+    transform: translateY(-3px);
+}
+
+.newsletter p {
+    color: #d1d1d1;
+    margin-bottom: 10px;
+    font-size: 0.95rem;
+}
+
+.newsletter-form {
+    display: flex;
+}
+
+.newsletter-form input {
+    flex: 1;
+    padding: 12px 15px;
+    background-color: #252547;
+    border: 1px solid #3a3a6a;
+    border-radius: 5px 0 0 5px;
+    color: #ffffff;
+    border-right: none;
+}
+
+.newsletter-form button {
+    background-color: #ffd700;
+    color: #1a1a2e;
+    border: none;
+    border-radius: 0 5px 5px 0;
+    padding: 0 20px;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.newsletter-form button:hover {
+    background-color: #ffc107;
+}
+
+.footer-bottom {
+    border-top: 1px solid #2a2a4a;
+    padding: 20px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: #b0b0b0;
+    font-size: 0.9rem;
+}
+
+.payment-methods {
+    display: flex;
+    gap: 15px;
+    font-size: 1.5rem;
+}
+
+.payment-methods i {
+    color: #d1d1d1;
+    transition: color 0.3s;
+}
+
+.payment-methods i:hover {
+    color: #ffd700;
+}
+
+/* Responsive Design */
+@media (max-width: 992px) {
+    .footer-content {
+        grid-template-columns: 1fr;
+    }
+    
+    .footer-brand {
+        max-width: 100%;
+    }
+    
+    .footer-links {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .footer-links {
+        grid-template-columns: 1fr;
+        gap: 40px;
+    }
+    
+    .footer-bottom {
+        flex-direction: column;
+        gap: 15px;
+        text-align: center;
+    }
+}
+/* Updated Logo Styles */
+.logo a {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+}
+
+.logo-icon {
+    margin-right: 10px;
+    display: flex;
+    align-items: center;
+}
+
+.logo-image {
+    height: 55px; /* Adjust based on your logo's proportions */
+    width: auto;
+    transition: transform 0.3s ease;
+}
+
+.logo-text {
+    color: var(--text-light);
+    font-size: 1.5rem;
+    font-weight: 700;
+    transition: color 0.3s;
+}
+
+/* Logo hover effects */
+.logo:hover .logo-image {
+    transform: scale(1.05);
+}
+
+.logo:hover .logo-text {
+    color: var(--secondary-color);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .logo-image {
+        height: 30px; /* Smaller logo on mobile */
+    }
+    
+    .logo-text {
+        font-size: 1.3rem;
+    }
+}
+/* Base Styles */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #0f131f;
+    color: #ffffff;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.section-title {
+    color: #ffd700;
+    font-size: 2rem;
+    margin-bottom: 30px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+/* Casino Grid Layout */
+.casinos-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 25px;
+    margin-top: 30px;
+}
+
+/* Casino Card Styles */
+.casino-card {
+    background: linear-gradient(135deg, #1a2035 0%, #0f131f 100%);
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+    position: relative;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.casino-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 30px rgba(0,0,0,0.3);
+}
+
+.casino-card.featured {
+    border: 2px solid #ffd700;
+}
+
+/* Card Header */
+.casino-banner {
+    background-color: #2a3f8f;
+    color: white;
+    padding: 8px 15px;
+    font-size: 0.9rem;
+    font-weight: bold;
+    text-align: center;
+    text-transform: uppercase;
+}
+
+.casino-header {
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.casino-logo-placeholder {
+    width: 60px;
+    height: 60px;
+    background-color: #2a3f8f;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.casino-logo {
+    width: 100%;
+    height: auto;
+}
+
+.casino-bonus h3 {
+    margin: 0;
+    color: #ffd700;
+    font-size: 1.2rem;
+}
+
+/* Card Body */
+.casino-body {
+    padding: 0 20px 20px;
+}
+
+.casino-features {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.casino-features li {
+    padding: 8px 0;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 0.95rem;
+}
+
+.casino-features i {
+    color: #4caf50;
+}
+
+/* Card Footer */
+.casino-footer {
+    padding: 15px 20px;
+    background-color: rgba(0,0,0,0.2);
+    text-align: center;
+}
+
+.btn-signup {
+    display: inline-block;
+    background: linear-gradient(to right, #ff8a00, #da1b60);
+    color: white;
+    padding: 12px 25px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: bold;
+    margin-bottom: 15px;
+    transition: all 0.3s ease;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+}
+
+.btn-signup:hover {
+    background: linear-gradient(to right, #da1b60, #ff8a00);
+    transform: translateY(-2px);
+}
+
+.casino-links {
+    font-size: 0.8rem;
+    color: #aaa;
+    margin-bottom: 10px;
+}
+
+.casino-links span {
+    cursor: pointer;
+}
+
+.casino-links span:hover {
+    color: #ffd700;
+}
+
+.promo-code {
+    background-color: rgba(255, 215, 0, 0.1);
+    padding: 8px 15px;
+    border-radius: 5px;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: 1px dashed rgba(255, 215, 0, 0.3);
+}
+
+.promo-code:hover {
+    background-color: rgba(255, 215, 0, 0.2);
+}
+
+.promo-code strong {
+    color: #ffd700;
+}
+
+.copy-hint {
+    font-size: 0.7rem;
+    color: #aaa;
+    margin-left: 5px;
+}
+
+/* Featured Badge */
+.featured-badge {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: #ffd700;
+    color: #000;
+    padding: 5px 10px;
+    border-radius: 20px;
+    font-size: 0.7rem;
+    font-weight: bold;
+    z-index: 1;
+}
+
+/* Copy Notification */
+.copy-notification {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: #4caf50;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    z-index: 1000;
+    animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    .casinos-grid {
+        grid-template-columns: 1fr;
+    }
+}
+/* Disclaimer Section Styles */
+.disclaimer-section {
+    padding: 80px 0;
+    background-color: #0f0e17;
+    color: #ffffff;
+}
+
+.disclaimer-content {
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.disclaimer-card {
+    background-color: #1a1a2e;
+    border-radius: 10px;
+    padding: 30px;
+    margin-bottom: 30px;
+    border-left: 4px solid #ffd700;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.disclaimer-heading {
+    color: #ffd700;
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+}
+
+.disclaimer-heading i {
+    margin-right: 15px;
+    font-size: 1.3rem;
+}
+
+.disclaimer-text p {
+    color: #d1d1d1;
+    line-height: 1.8;
+    margin-bottom: 15px;
+    font-size: 1.05rem;
+}
+
+.disclaimer-text p:last-child {
+    margin-bottom: 0;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+    .disclaimer-section {
+        padding: 50px 0;
+    }
+    
+    .disclaimer-card {
+        padding: 20px;
+    }
+    
+    .disclaimer-heading {
+        font-size: 1.3rem;
+    }
+    
+    .disclaimer-text p {
+        font-size: 1rem;
+    }
+}
+/* Privacy Policy Section */
+.policy-section {
+    padding: 80px 0;
+    background-color: #0f0e17;
+    color: #ffffff;
+}
+
+.policy-content {
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.policy-effective-date {
+    color: #ffd700;
+    margin-bottom: 30px;
+    font-size: 1rem;
+}
+
+.policy-intro {
+    margin-bottom: 40px;
+    font-size: 1.1rem;
+    line-height: 1.7;
+}
+
+.policy-card {
+    background-color: #1a1a2e;
+    border-radius: 10px;
+    padding: 30px;
+    margin-bottom: 30px;
+    border-left: 4px solid #ffd700;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.policy-heading {
+    color: #ffd700;
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+}
+
+.policy-heading i {
+    margin-right: 15px;
+    font-size: 1.3rem;
+}
+
+.policy-text {
+    color: #d1d1d1;
+    line-height: 1.8;
+}
+
+.policy-text h3 {
+    color: #ffffff;
+    margin: 20px 0 10px;
+    font-size: 1.2rem;
+}
+
+.policy-list {
+    list-style: none;
+    margin: 15px 0;
+    padding-left: 5px;
+}
+
+.policy-list li {
+    margin-bottom: 10px;
+    display: flex;
+    align-items: flex-start;
+}
+
+.policy-list i {
+    color: #ffd700;
+    margin-right: 10px;
+    font-size: 0.9rem;
+    margin-top: 4px;
+}
+
+.policy-link {
+    color: #ffd700;
+    text-decoration: none;
+    transition: all 0.3s;
+}
+
+.policy-link:hover {
+    text-decoration: underline;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+    .policy-section {
+        padding: 50px 0;
+    }
+    
+    .policy-card {
+        padding: 20px;
+    }
+    
+    .policy-heading {
+        font-size: 1.3rem;
+    }
+}
+/* Add to existing styles.css */
+
+/* Leaderboard Section */
+.leaderboard-section {
+    padding: 80px 0;
+    background-color: #0f0e17;
+    background: linear-gradient(135deg, #0f0e17 0%, #1a1a2e 100%);
+    color: #ffffff;
+}
+
+.leaderboard-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 25px;
+    margin-top: 30px;
+}
+
+.leaderboard-entry {
+    background: linear-gradient(135deg, #1a2035 0%, #0f131f 100%);
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+    position: relative;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.leaderboard-entry:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 30px rgba(0,0,0,0.3);
+}
+
+.leaderboard-entry.top-rank {
+    border: 2px solid #ffd700;
+}
+
+.leaderboard-header {
+    padding: 15px 20px;
+    background: linear-gradient(135deg, #2a2a4a 0%, #1a1a2e 100%);
+    border-bottom: 1px solid #ffd700;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.leaderboard-rank {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #ffd700;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+
+.leaderboard-player {
+    font-size: 1.2rem;
+    color: #ffffff;
+}
+
+.leaderboard-body {
+    padding: 20px;
+    text-align: center;
+}
+
+.leaderboard-score {
+    font-size: 1.3rem;
+    color: #ffd700;
+    margin-bottom: 10px;
+}
+
+.leaderboard-details {
+    font-size: 0.95rem;
+    color: #d1d1d1;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    .leaderboard-grid {
+        grid-template-columns: 1fr;
+        max-width: 400px;
+        margin: 0 auto;
+    }
+}
+.leaderboard-error {
+    color: #ff4444;
+    text-align: center;
+    font-size: 1.1rem;
+    padding: 20px;
+    background-color: rgba(255, 68, 68, 0.1);
+    border-radius: 5px;
+    border: 1px solid #ff4444;
+}
+.terms-section {
+    padding: 80px 0;
+    background-color: #0f0e17;
+    background: linear-gradient(135deg, #0f0e17 0%, #1a1a2e 100%);
+    color: #ffffff;
+}
+
+.effective-date {
+    font-style: italic;
+    color: #ffd700;
+    margin-bottom: 20px;
+}
+
+.terms-section h3 {
+    color: #ffd700;
+    margin-top: 30px;
+}
+
+.terms-section ul {
+    list-style-type: disc;
+    margin-left: 20px;
+}
+
+.terms-section ul li {
+    margin-bottom: 10px;
+}
+.main-header .container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between; /* Ensures logo and mobile menu button are on edges */
+}
+
+.main-nav {
+    flex: 1; /* Allows main-nav to take available space */
+    display: flex;
+    justify-content: center; /* Centers the navigation items */
+}
+
+.main-nav ul {
+    display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.main-nav ul li {
+    margin: 0 15px; /* Adjust spacing between nav items */
+}
+
+.logo {
+    flex-shrink: 0; /* Prevents logo from shrinking */
+}
+
+.mobile-menu-btn {
+    flex-shrink: 0; /* Prevents mobile menu button from shrinking */
+}
+.social-section {
+    padding: 60px 0;
+    background-color: #0f0e17;
+    background: linear-gradient(135deg, #0f0e17 0%, #1a1a2e 100%);
+    color: #ffffff;
+}
+
+.last-updated {
+    font-style: italic;
+    color: #d4af37;
+    font-size: 0.9rem;
+    margin-bottom: 15px;
+}
+
+.social-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.social-card {
+    background-color: #1a1a2e;
+    padding: 15px;
+    border-radius: 6px;
+    text-align: center;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.social-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+.social-card i {
+    font-size: 2rem;
+    margin-bottom: 10px;
+}
+
+.social-card h3 {
+    color: #d4af37;
+    margin-bottom: 8px;
+    font-size: 1.2rem;
+}
+
+.social-card p {
+    color: #b0b0b0;
+    margin-bottom: 10px;
+    font-size: 0.85rem;
+}
+
+.btn-visit {
+    display: inline-block;
+    padding: 4px 8px;
+    background: linear-gradient(135deg, #d4af37, #b8972f);
+    color: #0f0e17;
+    text-decoration: none;
+    border-radius: 4px;
+    font-size: 0.85rem;
+    font-weight: normal;
+    border: 1px solid #b8972f;
+    transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.btn-visit:hover {
+    background: linear-gradient(135deg, #e6c200, #c9a32f);
+    transform: scale(1.05);
+}
+
+@media (max-width: 768px) {
+    .social-grid {
+        grid-template-columns: 1fr;
+        gap: 10px;
+    }
+    .social-card {
+        margin: 0 5px;
+    }
+}
+/* Header Social Links */
+.header-social-links {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-shrink: 0; 
+}
+
+.header-social-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 35px;
+    height: 35px;
+    background-color: #252547; 
+    border-radius: 50%;
+    color: #d1d1d1; 
+    font-size: 1.2rem;
+    transition: all 0.3s ease;
+    text-decoration: none;
+}
+
+.header-social-icon:hover {
+    background-color: #ffd700; 
+    color: #1a1a2e; 
+    transform: translateY(-3px); 
+    box-shadow: 0 5px 10px rgba(255, 215, 0, 0.3); 
+}
+
+/* Responsive Adjustments for Header */
+@media (max-width: 992px) {
+    .header-social-links {
+        display: none; 
+    }
+
+    .main-header .container {
+        justify-content: space-between; 
+    }
+}
+
+/* Ensure Header Layout */
+.main-header .container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between; 
+    flex-wrap: nowrap;
+}
+
+.main-nav {
+    flex: 1;
+    display: flex;
+    justify-content: center; 
+}
+
+.logo, .mobile-menu-btn, .header-social-links {
+    flex-shrink: 0; 
+}

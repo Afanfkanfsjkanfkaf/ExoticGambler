@@ -1,109 +1,102 @@
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', () => {
     // Mobile menu toggle functionality
     const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+    const navWrapper = document.querySelector('.nav-wrapper');
     const mainNav = document.querySelector('.main-nav');
-    const headerActions = document.querySelector('.header-actions');
-    
-    mobileMenuBtn.addEventListener('click', function() {
-        const isNavVisible = mainNav.style.display === 'block';
-        
-        if (isNavVisible) {
-            mainNav.style.display = 'none';
-            headerActions.style.display = 'none';
-            this.innerHTML = '<i class="fas fa-bars"></i>';
-        } else {
-            mainNav.style.display = 'block';
-            headerActions.style.display = 'flex';
-            mainNav.style.position = 'absolute';
-            mainNav.style.top = '100%';
-            mainNav.style.left = '0';
-            mainNav.style.width = '100%';
-            mainNav.style.backgroundColor = 'var(--dark-color)';
-            mainNav.style.padding = '20px';
-            mainNav.style.boxShadow = '0 4px 8px rgba(0,0,0,0.2)';
-            
-            mainNav.querySelector('ul').style.flexDirection = 'column';
-            mainNav.querySelectorAll('li').forEach(li => {
-                li.style.margin = '10px 0';
-            });
-            
-            headerActions.style.position = 'absolute';
-            headerActions.style.top = 'calc(100% + 120px)';
-            headerActions.style.left = '0';
-            headerActions.style.width = '100%';
-            headerActions.style.padding = '20px';
-            headerActions.style.backgroundColor = 'var(--dark-color)';
-            headerActions.style.justifyContent = 'center';
-            headerActions.style.gap = '20px';
-            
-            this.innerHTML = '<i class="fas fa-times"></i>';
-        }
-    });
-    
-    // Responsive adjustments
-    function handleResize() {
-        if (window.innerWidth > 992) {
-            mainNav.style.display = '';
-            headerActions.style.display = '';
-            mainNav.querySelector('ul').style.flexDirection = '';
-            mainNav.querySelectorAll('li').forEach(li => {
-                li.style.margin = '';
-            });
-        }
-    }
-    
-    window.addEventListener('resize', handleResize);
-    
-    // Add active class to current page link
-    const navLinks = document.querySelectorAll('.main-nav a');
-    navLinks.forEach(link => {
-        link.addEventListener('click', function(e) {
-            navLinks.forEach(l => l.classList.remove('active'));
-            this.classList.add('active');
-        });
-    });
-});
 
-document.addEventListener('DOMContentLoaded', function() {
+    if (mobileMenuBtn && navWrapper && mainNav) {
+        mobileMenuBtn.addEventListener('click', () => {
+            // Toggle active classes
+            mobileMenuBtn.classList.toggle('active');
+            navWrapper.classList.toggle('active');
+            mainNav.classList.toggle('active');
+
+            // Calculate the full height of the menu for smooth transition
+            if (navWrapper.classList.contains('active')) {
+                const menuHeight = mainNav.scrollHeight + 'px';
+                navWrapper.style.maxHeight = menuHeight;
+            } else {
+                navWrapper.style.maxHeight = '0px';
+            }
+        });
+
+        // Close menu when a nav link is clicked (improves UX on mobile)
+        const navLinks = mainNav.querySelectorAll('a');
+        navLinks.forEach(link => {
+            link.addEventListener('click', function(e) {
+                // Add active class to current page link
+                navLinks.forEach(l => l.classList.remove('active'));
+                this.classList.add('active');
+
+                // Close the mobile menu with a slight delay for smooth transition
+                if (mobileMenuBtn.classList.contains('active')) {
+                    mobileMenuBtn.classList.remove('active');
+                    navWrapper.classList.remove('active');
+                    mainNav.classList.remove('active');
+
+                    // Add a small delay to ensure the transition completes before navigation
+                    setTimeout(() => {
+                        navWrapper.style.maxHeight = '0px';
+                    }, 100); // 100ms delay to allow transition to start
+
+                    // If this is the "Offers" link, ensure smooth navigation
+                    if (this.textContent.trim().toLowerCase() === 'offers') {
+                        e.preventDefault(); // Prevent immediate navigation
+                        setTimeout(() => {
+                            window.location.href = this.href; // Navigate after menu closes
+                        }, 300); // Match the CSS transition duration (0.3s)
+                    }
+                }
+            });
+        });
+
+        // Handle window resize to reset menu state on larger screens
+        window.addEventListener('resize', () => {
+            if (window.innerWidth > 992) {
+                mobileMenuBtn.classList.remove('active');
+                navWrapper.classList.remove('active');
+                mainNav.classList.remove('active');
+                navWrapper.style.maxHeight = null; // Reset max-height for desktop
+            }
+        });
+    }
+
     // Casino card hover effect enhancement
     const casinoCards = document.querySelectorAll('.casino-card');
-    
     casinoCards.forEach(card => {
         card.addEventListener('mouseenter', function() {
             this.querySelector('.btn-bonus').style.transform = 'translateY(-3px)';
         });
-        
+
         card.addEventListener('mouseleave', function() {
             this.querySelector('.btn-bonus').style.transform = '';
         });
-    });
-    
-    // You'll add your actual links later like this:
-    // document.querySelectorAll('.btn-bonus').forEach((btn, index) => {
-    //     btn.href = yourLinksArray[index];
-    // });
-});
-document.addEventListener('DOMContentLoaded', function() {
 
+        // Track clicks on casino cards (analytics)
+        card.addEventListener('click', function(e) {
+            if (e.target.closest('.promo-code') || e.target.closest('.btn-signup')) {
+                return;
+            }
+            const casinoName = this.querySelector('.casino-bonus h3').textContent;
+            console.log('Casino card clicked:', casinoName);
+        });
+    });
+
+    // Promo code copy functionality
     const promoCodeElements = document.querySelectorAll('.promo-code');
-    
     promoCodeElements.forEach(element => {
         element.addEventListener('click', function() {
             const code = this.getAttribute('data-code') || 'EXOTIC';
             copyToClipboard(code);
-            
-        
             showCopyNotification(code);
         });
     });
-    
-    // Function to copy text to clipboard
+
     function copyToClipboard(text) {
         navigator.clipboard.writeText(text).then(() => {
             console.log('Copied to clipboard:', text);
         }).catch(err => {
             console.error('Failed to copy:', err);
-         
             const textarea = document.createElement('textarea');
             textarea.value = text;
             document.body.appendChild(textarea);
@@ -117,22 +110,18 @@ document.addEventListener('DOMContentLoaded', function() {
             document.body.removeChild(textarea);
         });
     }
-    
-    // Function to show copy notification
+
     function showCopyNotification(code) {
-        
         const existingNotification = document.querySelector('.copy-notification');
         if (existingNotification) {
             existingNotification.remove();
         }
-        
-        // Create new notification
+
         const notification = document.createElement('div');
         notification.className = 'copy-notification';
         notification.textContent = `Copied: ${code}`;
         document.body.appendChild(notification);
-        
-        
+
         setTimeout(() => {
             notification.style.opacity = '0';
             setTimeout(() => {
@@ -140,23 +129,6 @@ document.addEventListener('DOMContentLoaded', function() {
             }, 300);
         }, 3000);
     }
-    
-    // Track clicks on casino cards (analytics)
-    document.querySelectorAll('.casino-card').forEach(card => {
-        card.addEventListener('click', function(e) {
-           
-            if (e.target.closest('.promo-code') || e.target.closest('.btn-signup')) {
-                return;
-            }
-            
-            const casinoName = this.querySelector('.casino-bonus h3').textContent;
-            console.log('Casino card clicked:', casinoName);
-            
-        });
-    });
-});
-document.addEventListener('DOMContentLoaded', function() {
-  
 
     // Leaderboard API integration
     if (document.querySelector('#leaderboard-grid')) {
@@ -193,10 +165,9 @@ document.addEventListener('DOMContentLoaded', function() {
         const leaderboardGrid = document.querySelector('#leaderboard-grid');
         leaderboardGrid.innerHTML = '';
 
-       
         let leaderboardData = [];
         if (Array.isArray(data.data)) {
-            leaderboardData = data.data; 
+            leaderboardData = data.data;
         } else if (Array.isArray(data)) {
             leaderboardData = data;
         } else {
@@ -230,49 +201,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 </div>
             `;
             leaderboardGrid.appendChild(entryElement);
-        });
-    }
-});
-document.addEventListener('DOMContentLoaded', () => {
-    const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
-    const navWrapper = document.querySelector('.nav-wrapper');
-    const mainNav = document.querySelector('.main-nav');
-
-    if (mobileMenuBtn && navWrapper && mainNav) {
-        mobileMenuBtn.addEventListener('click', () => {
-            // Toggle active classes
-            mobileMenuBtn.classList.toggle('active');
-            navWrapper.classList.toggle('active');
-            mainNav.classList.toggle('active');
-
-            // Calculate the full height of the menu for smooth transition
-            if (navWrapper.classList.contains('active')) {
-                const menuHeight = mainNav.scrollHeight + 'px'; // Get the full height of the menu content
-                navWrapper.style.maxHeight = menuHeight; // Set max-height dynamically
-            } else {
-                navWrapper.style.maxHeight = '0px'; // Collapse the menu
-            }
-        });
-
-        // Close menu when a nav link is clicked (optional, improves UX on mobile)
-        const navLinks = mainNav.querySelectorAll('a');
-        navLinks.forEach(link => {
-            link.addEventListener('click', () => {
-                mobileMenuBtn.classList.remove('active');
-                navWrapper.classList.remove('active');
-                mainNav.classList.remove('active');
-                navWrapper.style.maxHeight = '0px';
-            });
-        });
-
-        // Handle window resize to reset menu state on larger screens
-        window.addEventListener('resize', () => {
-            if (window.innerWidth > 992) {
-                mobileMenuBtn.classList.remove('active');
-                navWrapper.classList.remove('active');
-                mainNav.classList.remove('active');
-                navWrapper.style.maxHeight = null; // Reset max-height for desktop
-            }
         });
     }
 });

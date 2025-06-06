@@ -204,3 +204,94 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 });
+  // Casino card hover effect enhancement
+    const casinoCards = document.querySelectorAll('.casino-card');
+    casinoCards.forEach(card => {
+        card.addEventListener('mouseenter', function() {
+            const signupButton = this.querySelector('.btn-signup');
+            if (signupButton) {
+                signupButton.style.transform = 'scale(1.05) translateY(-5px)';
+            }
+        });
+
+        card.addEventListener('mouseleave', function() {
+            const signupButton = this.querySelector('.btn-signup');
+            if (signupButton) {
+                signupButton.style.transform = '';
+            }
+        });
+
+        // Track clicks on casino cards (analytics)
+        card.addEventListener('click', function(e) {
+            if (e.target.closest('.promo-code') || e.target.closest('.btn-signup')) {
+                return;
+            }
+            const casinoName = this.querySelector('.casino-bonus h3').textContent;
+            console.log('Casino card clicked:', casinoName);
+        });
+    });
+
+    // Promo code copy functionality
+    const promoCodeElements = document.querySelectorAll('.promo-code');
+    promoCodeElements.forEach(element => {
+        element.addEventListener('click', function() {
+            const code = this.getAttribute('data-code');
+            if (code) {
+                copyToClipboard(code);
+                showCopyNotification(code);
+            } else {
+                console.error('No data-code attribute found for promo code element:', this);
+                showCopyNotification('Error: Code not found');
+            }
+        });
+    });
+
+    function copyToClipboard(text) {
+        if (navigator.clipboard && window.isSecureContext) {
+            navigator.clipboard.writeText(text).then(() => {
+                console.log('Copied to clipboard:', text);
+            }).catch(err => {
+                console.error('Clipboard API failed:', err);
+                fallbackCopy(text);
+            });
+        } else {
+            fallbackCopy(text);
+        }
+    }
+
+    function fallbackCopy(text) {
+        const textarea = document.createElement('textarea');
+        textarea.value = text;
+        textarea.style.position = 'fixed';
+        textarea.style.opacity = '0';
+        document.body.appendChild(textarea);
+        textarea.select();
+        try {
+            document.execCommand('copy');
+            console.log('Fallback copy successful:', text);
+        } catch (err) {
+            console.error('Fallback copy failed:', err);
+            alert('Copy failed. Please copy manually: ' + text);
+        }
+        document.body.removeChild(textarea);
+    }
+
+    function showCopyNotification(code) {
+        const existingNotification = document.querySelector('.copy-notification');
+        if (existingNotification) {
+            existingNotification.remove();
+        }
+
+        const notification = document.createElement('div');
+        notification.className = 'copy-notification';
+        notification.textContent = `Copied: ${code}`;
+        document.body.appendChild(notification);
+
+        setTimeout(() => {
+            notification.style.opacity = '0';
+            setTimeout(() => {
+                notification.remove();
+            }, 300);
+        }, 3000);
+    }
+});

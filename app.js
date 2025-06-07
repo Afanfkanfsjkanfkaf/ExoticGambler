@@ -6,13 +6,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (mobileMenuBtn && navWrapper && mainNav) {
         mobileMenuBtn.addEventListener('click', () => {
-            // Toggle active classes
-            mobileMenuBtn.classList.toggle('active');
+            const isActive = mobileMenuBtn.classList.toggle('active');
             navWrapper.classList.toggle('active');
             mainNav.classList.toggle('active');
 
-            // Calculate the full height of the menu for smooth transition
-            if (navWrapper.classList.contains('active')) {
+            if (isActive) {
                 const menuHeight = mainNav.scrollHeight + 'px';
                 navWrapper.style.maxHeight = menuHeight;
             } else {
@@ -20,43 +18,40 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
 
-        // Close menu when a nav link is clicked (improves UX on mobile)
+        // Close menu when a nav link is clicked
         const navLinks = mainNav.querySelectorAll('a');
         navLinks.forEach(link => {
             link.addEventListener('click', function(e) {
-                // Add active class to current page link
                 navLinks.forEach(l => l.classList.remove('active'));
                 this.classList.add('active');
 
-                // Close the mobile menu with a slight delay for smooth transition
                 if (mobileMenuBtn.classList.contains('active')) {
                     mobileMenuBtn.classList.remove('active');
                     navWrapper.classList.remove('active');
                     mainNav.classList.remove('active');
-
-                    // Add a small delay to ensure the transition completes before navigation
                     setTimeout(() => {
                         navWrapper.style.maxHeight = '0px';
-                    }, 100); // 100ms delay to allow transition to start
+                    }, 100);
+                }
 
-                    // If this is the "Offers" link, ensure smooth navigation
-                    if (this.textContent.trim().toLowerCase() === 'offers') {
-                        e.preventDefault(); // Prevent immediate navigation
-                        setTimeout(() => {
-                            window.location.href = this.href; // Navigate after menu closes
-                        }, 300); // Match the CSS transition duration (0.3s)
-                    }
+                if (this.textContent.trim().toLowerCase() === 'offers') {
+                    e.preventDefault();
+                    setTimeout(() => {
+                        document.getElementById('exclusive-deals').scrollIntoView({ behavior: 'smooth' });
+                    }, 300);
                 }
             });
         });
 
-        // Handle window resize to reset menu state on larger screens
+        // Reset menu on resize
         window.addEventListener('resize', () => {
             if (window.innerWidth > 992) {
                 mobileMenuBtn.classList.remove('active');
                 navWrapper.classList.remove('active');
                 mainNav.classList.remove('active');
-                navWrapper.style.maxHeight = null; // Reset max-height for desktop
+                navWrapper.style.maxHeight = null;
+            } else if (navWrapper.classList.contains('active')) {
+                navWrapper.style.maxHeight = mainNav.scrollHeight + 'px';
             }
         });
     }
@@ -65,11 +60,17 @@ document.addEventListener('DOMContentLoaded', () => {
     const casinoCards = document.querySelectorAll('.casino-card');
     casinoCards.forEach(card => {
         card.addEventListener('mouseenter', function() {
-            this.querySelector('.btn-bonus').style.transform = 'translateY(-3px)';
+            const signupButton = this.querySelector('.btn-signup');
+            if (signupButton) {
+                signupButton.style.transform = 'scale(1.05) translateY(-5px)';
+            }
         });
 
         card.addEventListener('mouseleave', function() {
-            this.querySelector('.btn-bonus').style.transform = '';
+            const signupButton = this.querySelector('.btn-signup');
+            if (signupButton) {
+                signupButton.style.transform = '';
+            }
         });
 
         // Track clicks on casino cards (analytics)
@@ -86,29 +87,45 @@ document.addEventListener('DOMContentLoaded', () => {
     const promoCodeElements = document.querySelectorAll('.promo-code');
     promoCodeElements.forEach(element => {
         element.addEventListener('click', function() {
-            const code = this.getAttribute('data-code') || 'EXOTIC';
-            copyToClipboard(code);
-            showCopyNotification(code);
+            const code = this.getAttribute('data-code');
+            if (code) {
+                copyToClipboard(code);
+                showCopyNotification(code);
+            } else {
+                console.error('No data-code attribute found for promo code element:', this);
+                showCopyNotification('Error: Code not found');
+            }
         });
     });
 
     function copyToClipboard(text) {
-        navigator.clipboard.writeText(text).then(() => {
-            console.log('Copied to clipboard:', text);
-        }).catch(err => {
-            console.error('Failed to copy:', err);
-            const textarea = document.createElement('textarea');
-            textarea.value = text;
-            document.body.appendChild(textarea);
-            textarea.select();
-            try {
-                document.execCommand('copy');
-                console.log('Fallback copy successful');
-            } catch (err) {
-                console.error('Fallback copy failed:', err);
-            }
-            document.body.removeChild(textarea);
-        });
+        if (navigator.clipboard && window.isSecureContext) {
+            navigator.clipboard.writeText(text).then(() => {
+                console.log('Copied to clipboard:', text);
+            }).catch(err => {
+                console.error('Clipboard API failed:', err);
+                fallbackCopy(text);
+            });
+        } else {
+            fallbackCopy(text);
+        }
+    }
+
+    function fallbackCopy(text) {
+        const textarea = document.createElement('textarea');
+        textarea.value = text;
+        textarea.style.position = 'fixed';
+        textarea.style.opacity = '0';
+        document.body.appendChild(textarea);
+        textarea.select();
+        try {
+            document.execCommand('copy');
+            console.log('Fallback copy successful:', text);
+        } catch (err) {
+            console.error('Fallback copy failed:', err);
+            alert('Copy failed. Please copy manually: ' + text);
+        }
+        document.body.removeChild(textarea);
     }
 
     function showCopyNotification(code) {
@@ -202,96 +219,5 @@ document.addEventListener('DOMContentLoaded', () => {
             `;
             leaderboardGrid.appendChild(entryElement);
         });
-    }
-});
-  // Casino card hover effect enhancement
-    const casinoCards = document.querySelectorAll('.casino-card');
-    casinoCards.forEach(card => {
-        card.addEventListener('mouseenter', function() {
-            const signupButton = this.querySelector('.btn-signup');
-            if (signupButton) {
-                signupButton.style.transform = 'scale(1.05) translateY(-5px)';
-            }
-        });
-
-        card.addEventListener('mouseleave', function() {
-            const signupButton = this.querySelector('.btn-signup');
-            if (signupButton) {
-                signupButton.style.transform = '';
-            }
-        });
-
-        // Track clicks on casino cards (analytics)
-        card.addEventListener('click', function(e) {
-            if (e.target.closest('.promo-code') || e.target.closest('.btn-signup')) {
-                return;
-            }
-            const casinoName = this.querySelector('.casino-bonus h3').textContent;
-            console.log('Casino card clicked:', casinoName);
-        });
-    });
-
-    // Promo code copy functionality
-    const promoCodeElements = document.querySelectorAll('.promo-code');
-    promoCodeElements.forEach(element => {
-        element.addEventListener('click', function() {
-            const code = this.getAttribute('data-code');
-            if (code) {
-                copyToClipboard(code);
-                showCopyNotification(code);
-            } else {
-                console.error('No data-code attribute found for promo code element:', this);
-                showCopyNotification('Error: Code not found');
-            }
-        });
-    });
-
-    function copyToClipboard(text) {
-        if (navigator.clipboard && window.isSecureContext) {
-            navigator.clipboard.writeText(text).then(() => {
-                console.log('Copied to clipboard:', text);
-            }).catch(err => {
-                console.error('Clipboard API failed:', err);
-                fallbackCopy(text);
-            });
-        } else {
-            fallbackCopy(text);
-        }
-    }
-
-    function fallbackCopy(text) {
-        const textarea = document.createElement('textarea');
-        textarea.value = text;
-        textarea.style.position = 'fixed';
-        textarea.style.opacity = '0';
-        document.body.appendChild(textarea);
-        textarea.select();
-        try {
-            document.execCommand('copy');
-            console.log('Fallback copy successful:', text);
-        } catch (err) {
-            console.error('Fallback copy failed:', err);
-            alert('Copy failed. Please copy manually: ' + text);
-        }
-        document.body.removeChild(textarea);
-    }
-
-    function showCopyNotification(code) {
-        const existingNotification = document.querySelector('.copy-notification');
-        if (existingNotification) {
-            existingNotification.remove();
-        }
-
-        const notification = document.createElement('div');
-        notification.className = 'copy-notification';
-        notification.textContent = `Copied: ${code}`;
-        document.body.appendChild(notification);
-
-        setTimeout(() => {
-            notification.style.opacity = '0';
-            setTimeout(() => {
-                notification.remove();
-            }, 300);
-        }, 3000);
     }
 });

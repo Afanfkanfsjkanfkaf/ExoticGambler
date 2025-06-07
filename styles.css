@@ -4927,19 +4927,22 @@ textarea {
     position: sticky;
     top: 0;
     z-index: 1000;
+    display: flex;
+    align-items: center;
 }
 
 .nav-wrapper {
     flex: 1;
     display: flex;
     justify-content: center;
-    max-height: 0;
-    overflow: hidden;
+    max-height: none; /* Default to visible on desktop */
+    overflow: visible;
     transition: max-height 0.3s ease-in-out;
 }
 
 .nav-wrapper.active {
     max-height: 300px; /* Adjust based on content height */
+    overflow: visible;
 }
 
 .main-nav {

@@ -50,6 +50,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 navWrapper.classList.remove('active');
                 mainNav.classList.remove('active');
                 navWrapper.style.maxHeight = null;
+                navWrapper.style.display = 'flex'; // Ensure display is restored
+                mainNav.style.display = 'flex';   // Ensure main nav is visible
             } else if (navWrapper.classList.contains('active')) {
                 navWrapper.style.maxHeight = mainNav.scrollHeight + 'px';
             }
